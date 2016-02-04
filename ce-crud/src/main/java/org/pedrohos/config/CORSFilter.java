@@ -1,4 +1,4 @@
-package org.pedrohos;
+package org.pedrohos.config;
 
 import java.io.IOException;
 
