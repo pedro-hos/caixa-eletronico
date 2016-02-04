@@ -20,7 +20,7 @@
     				}, 
 
     				function(erro) {
-
+    					console.log(erro);
     				});
     		};
 
@@ -38,7 +38,6 @@
 	    			});
 
     		};
-
 
     });
 
