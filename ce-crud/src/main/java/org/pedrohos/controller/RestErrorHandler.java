@@ -3,7 +3,6 @@ package org.pedrohos.controller;
 import java.util.List;
 import java.util.Locale;
 
-import org.pedrohos.model.dto.FieldErrorDTO;
 import org.pedrohos.model.dto.ValidationErrorDTO;
 import org.pedrohos.model.exceptions.JaExisteException;
 import org.pedrohos.model.exceptions.NaoExisteException;
@@ -31,14 +30,18 @@ public class RestErrorHandler {
     
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(JaExisteException.class)
-    public @ResponseBody FieldErrorDTO jaExiste(JaExisteException ex) {
-    	return new FieldErrorDTO(ex.getMessage());
+    public @ResponseBody ValidationErrorDTO jaExiste(JaExisteException ex) {
+    	ValidationErrorDTO validationErrorDTO = new ValidationErrorDTO();
+    	validationErrorDTO.addFieldError(ex.getMessage());
+    	return validationErrorDTO;
     }
     
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(NaoExisteException.class)
-    public @ResponseBody FieldErrorDTO jaExiste(NaoExisteException ex) {
-    	return new FieldErrorDTO(ex.getMessage());
+    public @ResponseBody ValidationErrorDTO jaExiste(NaoExisteException ex) {
+    	ValidationErrorDTO validationErrorDTO = new ValidationErrorDTO();
+    	validationErrorDTO.addFieldError(ex.getMessage());
+    	return validationErrorDTO;
     }
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
