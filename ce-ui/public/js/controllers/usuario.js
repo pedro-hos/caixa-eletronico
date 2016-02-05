@@ -5,6 +5,8 @@
 	angular.module('ce-ui')
     	.controller('UsuarioController', function ($scope, usuarioService) {
 
+            $scope.numero_invalido = "Digite um número Válido";
+
     		$scope.usuario   = new usuarioService();
     		$scope.usuarios  = [];
     		$scope.mensagens = '';

@@ -43,9 +43,9 @@ public class CaixaEletronico extends DefaultEntity {
 
 	public void setNotas(Collection<Nota> notas) {
 		
-		for (Nota nota : notas) {
-			nota.setCaixaEletronico(this);
-		}
+		notas.forEach(n -> {
+			n.setCaixaEletronico(this);
+		});
 		
 		this.notas = notas;
 	}
@@ -57,5 +57,5 @@ public class CaixaEletronico extends DefaultEntity {
 	public void setSaldo(BigInteger saldo) {
 		this.saldo = saldo;
 	}
-
+	
 }

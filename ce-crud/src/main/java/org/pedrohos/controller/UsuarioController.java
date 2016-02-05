@@ -58,7 +58,7 @@ public class UsuarioController {
 		BigInteger saldoAtual = usuario.getSaldo();
 		
 		if(saldoAtual.compareTo(saqueDTO.getValorASacar()) <= 0) {
-			throw new SaldoInsuficienteException("Não Existe saldo suficiente para o usuário: " + nome + ". Saldo: " + saldoAtual);
+			throw new SaldoInsuficienteException("Não Existe saldo suficiente para o usuário: " + nome + ", ou ficará com saldo Zero. Saldo: " + saldoAtual);
 		}
 		
 		usuario.setSaldo(saldoAtual.subtract(saqueDTO.getValorASacar()));

@@ -1,15 +1,19 @@
 package org.pedrohos.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.math.BigInteger;
+import java.util.Collection;
 
+import org.pedrohos.model.dto.NotaDTO;
 import org.pedrohos.model.dto.SaqueDTO;
 import org.pedrohos.model.exceptions.SaqueException;
+import org.pedrohos.service.CaixaEletronicoService;
 import org.pedrohos.service.SaqueService;
 import org.pedrohos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,28 +28,22 @@ public class SaqueController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@RequestMapping(value = {"/", ""}, method = GET, produces = APPLICATION_JSON_VALUE)
-	public @ResponseBody String todosUsuarios() {
+	@Autowired
+	private CaixaEletronicoService caixaService;
+	
+	@RequestMapping(value = {"/", ""}, method = POST, produces = APPLICATION_JSON_VALUE)
+	public @ResponseBody Collection<NotaDTO> realizaSaque(@RequestBody SaqueDTO saqueDTO) {
 		
-		SaqueDTO saqueDTO = new SaqueDTO();
-		saqueDTO.setNomeCaixaEletronico("C2");
-		saqueDTO.setNomeUsuario("Pedro Silva");
-		saqueDTO.setValorASacar(BigInteger.TEN);
-		
-		try {
-			usuarioService.verificaSaldoERealizaSaqueSePossivel(saqueDTO);
-			
-		} catch (SaqueException e) {
-			throw new SaqueException(e.getMessage());
+		if(saqueDTO.getValorASacar().remainder(BigInteger.TEN) != BigInteger.ZERO) {
+			throw new SaqueException("Aceitamos apenas saques multiplosd de 10");
 		}
 		
-		/*Collection<NotaDTO> notas = saqueService.realizaCalculoDeNotas(new BigInteger("130"), Arrays.asList("50", "10"));
+		usuarioService.verificaSaldoERealizaSaqueSePossivel(saqueDTO);
+		Collection<String> notasDisponiveis = caixaService.verificaSaldoEPegaNotasDisponiveis(saqueDTO);
+		Collection<NotaDTO> notas = saqueService.realizaCalculoDeNotas(saqueDTO.getValorASacar(), notasDisponiveis);
+		caixaService.sacar(notas, saqueDTO.getNomeCaixaEletronico());
 		
-		for (NotaDTO notaDTO : notas) {
-			System.out.println(notaDTO.getNota() + ": " + notaDTO.getQuantidade());
-		}*/
-		
-		return "ok";
+		return notas;
 	}
 
 }
