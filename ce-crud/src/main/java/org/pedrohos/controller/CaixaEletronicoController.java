@@ -45,7 +45,7 @@ public class CaixaEletronicoController {
 		return caixasEletronico.findAll();
 	}
 	
-	@RequestMapping(value = {"/{nome}", ""}, method = GET, produces = APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{nome}", method = GET, produces = APPLICATION_JSON_VALUE)
 	public @ResponseBody CaixaEletronico caixaEletronicoComNome(@PathVariable String nome) {
 		
 		CaixaEletronico caixaEletronico = caixasEletronico.findByNomeIgnoreCase(nome);

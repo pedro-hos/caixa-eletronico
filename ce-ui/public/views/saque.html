@@ -1,1 +1,53 @@
-saque
+
+<div class="alert alert-danger" role="alert" ng-repeat="mensagem in mensagens">
+	{{mensagem.message}}
+</div>
+
+<form class="form" name="saqueForm" ng-submit="sacar()">
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="selectEspecie">Nome Caixa Eletrônico</label>
+				<select class="form-control" ng-model="saque.nomeCaixaEletronico" ng-options="caixa for caixa in caixas" required>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="selectEspecie">Nome Usuário</label>
+				<select class="form-control" ng-model="saque.nomeUsuario" ng-options="usuario for usuario in usuarios" required>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="selectEspecie">Valor do Saque</label>
+				<div class="input-group">
+					<div class="input-group-addon">R$</div>
+					<input type="number" class="form-control" name="saque" id="_saque" ng-model="saque.valorASacar" min="10" required>
+					<div class="input-group-addon">.00</div>
+				</div>
+	    		<p class="text-danger" ng-show="saqueForm.saque.$error.number"> {{numero_invalido}}</p>
+	  		</div>
+  		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+	      		<button type="submit" class="btn btn-default" ng-disabled="saqueForm.$invalid">Sacar</button>
+			</div>
+		</div>
+  	</div>
+
+</form>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  	{{notas.notas}}
+  </div>
+</div

@@ -42,8 +42,6 @@
 
     			$scope.caixa.notas = $scope.notas;
     			
-    			console.log($scope.caixa);
-
     			$scope.caixa.$save()
 	    			.then(function() {
 	    				inicializa();

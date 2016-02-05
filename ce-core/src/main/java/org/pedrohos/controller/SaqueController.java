@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.Collection;
 
 import org.pedrohos.model.dto.NotaDTO;
+import org.pedrohos.model.dto.NotasDTO;
 import org.pedrohos.model.dto.SaqueDTO;
 import org.pedrohos.model.exceptions.SaqueException;
 import org.pedrohos.service.CaixaEletronicoService;
@@ -31,8 +32,8 @@ public class SaqueController {
 	@Autowired
 	private CaixaEletronicoService caixaService;
 	
-	@RequestMapping(value = {"/", ""}, method = POST, produces = APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<NotaDTO> realizaSaque(@RequestBody SaqueDTO saqueDTO) {
+	@RequestMapping(value = {"/", ""}, method = POST, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+	public @ResponseBody NotasDTO realizaSaque(@RequestBody SaqueDTO saqueDTO) {
 		
 		if(saqueDTO.getValorASacar().remainder(BigInteger.TEN) != BigInteger.ZERO) {
 			throw new SaqueException("Aceitamos apenas saques multiplosd de 10");
@@ -43,7 +44,9 @@ public class SaqueController {
 		Collection<NotaDTO> notas = saqueService.realizaCalculoDeNotas(saqueDTO.getValorASacar(), notasDisponiveis);
 		caixaService.sacar(notas, saqueDTO.getNomeCaixaEletronico());
 		
-		return notas;
+		NotasDTO notasDTO = new NotasDTO(notas);
+		return notasDTO;
+		
 	}
 
 }
