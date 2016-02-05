@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.pedrohos.model.dto.ValidationErrorDTO;
 import org.pedrohos.model.exceptions.JaExisteException;
 import org.pedrohos.model.exceptions.NaoExisteException;
+import org.pedrohos.model.exceptions.SaqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -26,6 +27,14 @@ public class RestErrorHandler {
     @Autowired
     public RestErrorHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+    
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(SaqueException.class)
+    public @ResponseBody ValidationErrorDTO saldoInsuficiente(SaqueException ex) {
+    	ValidationErrorDTO validationErrorDTO = new ValidationErrorDTO();
+    	validationErrorDTO.addFieldError(ex.getMessage());
+    	return validationErrorDTO;
     }
     
     @ResponseStatus(HttpStatus.CONFLICT)

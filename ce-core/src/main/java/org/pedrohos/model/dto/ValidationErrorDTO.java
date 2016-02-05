@@ -5,20 +5,20 @@ import java.util.List;
 
 public class ValidationErrorDTO {
 
-	private List<FieldErrorDTO> fieldErrors = new ArrayList<>();
+	private List<MessageDTO> fieldErrors = new ArrayList<>();
 	
     public ValidationErrorDTO() {}
  
     public void addFieldError(String message) {
-        FieldErrorDTO error = new FieldErrorDTO(message);
+        MessageDTO error = new MessageDTO(message);
         this.getFieldErrors().add(error);
     }
 
-	public List<FieldErrorDTO> getFieldErrors() {
+	public List<MessageDTO> getFieldErrors() {
 		return fieldErrors;
 	}
 
-	public void setFieldErrors(List<FieldErrorDTO> fieldErrors) {
+	public void setFieldErrors(List<MessageDTO> fieldErrors) {
 		this.fieldErrors = fieldErrors;
 	}
 }

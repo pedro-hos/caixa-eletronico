@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.pedrohos.model.dto.ValidationErrorDTO;
 import org.pedrohos.model.exceptions.JaExisteException;
 import org.pedrohos.model.exceptions.NaoExisteException;
+import org.pedrohos.model.exceptions.SaldoInsuficienteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -38,7 +39,15 @@ public class RestErrorHandler {
     
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(NaoExisteException.class)
-    public @ResponseBody ValidationErrorDTO jaExiste(NaoExisteException ex) {
+    public @ResponseBody ValidationErrorDTO naoExiste(NaoExisteException ex) {
+    	ValidationErrorDTO validationErrorDTO = new ValidationErrorDTO();
+    	validationErrorDTO.addFieldError(ex.getMessage());
+    	return validationErrorDTO;
+    }
+    
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(SaldoInsuficienteException.class)
+    public @ResponseBody ValidationErrorDTO saldoInsuficiente(SaldoInsuficienteException ex) {
     	ValidationErrorDTO validationErrorDTO = new ValidationErrorDTO();
     	validationErrorDTO.addFieldError(ex.getMessage());
     	return validationErrorDTO;

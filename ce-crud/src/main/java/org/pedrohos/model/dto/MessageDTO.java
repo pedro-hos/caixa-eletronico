@@ -1,10 +1,10 @@
 package org.pedrohos.model.dto;
 
-public class FieldErrorDTO {
+public class MessageDTO {
 	
     private String message;
  
-    public FieldErrorDTO( String message) {
+    public MessageDTO( String message) {
         this.setMessage(message);
     }
 
