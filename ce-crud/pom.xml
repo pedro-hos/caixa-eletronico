@@ -6,7 +6,7 @@
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 
-	<name>ce-core</name>
+	<name>ce-crud</name>
 	<description>Projeto backend, que fará o cadastro dos clientes e caixas eletrônicos.</description>
 
 	<properties>
@@ -88,6 +88,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.version}</version>
+				<configuration>
+					<profiles>
+						<profile>elephant</profile>
+					</profiles>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

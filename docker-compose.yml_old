@@ -1,0 +1,7 @@
+db:
+  image: postgres:9.3
+  expose:
+    - '5432'
+
+ui:
+  build: .

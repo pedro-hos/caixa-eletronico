@@ -26,7 +26,6 @@ public class CaixaEletronicoDTO {
 		this.saldo = saldo;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
