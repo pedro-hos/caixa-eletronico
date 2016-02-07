@@ -39,8 +39,8 @@ public class SaqueController {
 			throw new SaqueException("Aceitamos apenas saques multiplosd de 10");
 		}
 		
-		usuarioService.verificaSaldoERealizaSaqueSePossivel(saqueDTO);
 		Collection<String> notasDisponiveis = caixaService.verificaSaldoEPegaNotasDisponiveis(saqueDTO);
+		usuarioService.verificaSaldoERealizaSaqueSePossivel(saqueDTO);
 		Collection<NotaDTO> notas = saqueService.realizaCalculoDeNotas(saqueDTO.getValorASacar(), notasDisponiveis);
 		caixaService.sacar(notas, saqueDTO.getNomeCaixaEletronico());
 		
