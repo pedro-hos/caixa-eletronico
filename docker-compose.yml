@@ -1,0 +1,7 @@
+ce-ui:
+  build: ce-ui
+  volumes:
+    - ./ce-ui:/ce-ui
+  command: bash -c "cd ce-ui && npm install && bower install && gulp"
+  ports:
+    - '9000:9000'
