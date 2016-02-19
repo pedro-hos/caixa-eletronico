@@ -1,0 +1,86 @@
+
+<div class="alert alert-danger" role="alert" ng-repeat="mensagem in mensagens">
+	{{mensagem.message}}
+</div>
+
+<form class="form" name="caixaForm" ng-submit="novo()">
+
+	<div class="row">
+		<div class="col-md-9">
+			<div class="form-group">
+				<label for="selectEspecie">Nome</label>
+				<input type="text" class="form-control" id="_nome" placeholder="Nome" ng-model="caixa.nome" required>
+	 	 	</div>
+	 	</div>
+	 	<div class="col-md-3">
+	 	 	<div class="form-group">
+	 	 		<label for="selectEspecie">Saldo Total</label>
+	 	 		<input type="number" class="form-control" id="_saldo" ng-model="caixa.saldo" disabled>
+	  		</div>
+	  	</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+	 	 	<div class="form-group">
+	 	 		<label for="selectEspecie">Notas de R$ 100</label>
+	 	 		<input type="number" class="form-control" name="cem" id="_cem" ng-model="nota_cem.quantidade" ng-change="changeNota()">
+	 	 		<p class="text-danger" ng-show="caixaForm.cem.$error.number"> {{numero_invalido}}</p>
+	  		</div>
+	  	</div>
+
+	  	<div class="col-md-3">
+	 	 	<div class="form-group">
+	 	 		<label for="selectEspecie">Notas de R$ 50</label>
+	 	 		<input type="number" class="form-control" name="cinquenta" id="_cinquenta" ng-model="nota_cinquenta.quantidade" ng-change="changeNota()">
+	 	 		<p class="text-danger" ng-show="caixaForm.cinquenta.$error.number"> {{numero_invalido}}</p>
+	  		</div>
+	  	</div>
+
+	  	<div class="col-md-3">
+	 	 	<div class="form-group">
+	 	 		<label for="selectEspecie">Notas de R$ 20</label>
+	 	 		<input type="number" class="form-control" name="vinte" id="_vinte" ng-model="nota_vinte.quantidade" ng-change="changeNota()">
+	 	 		<p class="text-danger" ng-show="caixaForm.vinte.$error.number"> {{numero_invalido}}</p>
+	  		</div>
+	  	</div>
+
+	  	<div class="col-md-3">
+	 	 	<div class="form-group">
+	 	 		<label for="selectEspecie">Notas de R$ 10</label>
+	 	 		<input type="number" class="form-control" name="dez" id="_dez" ng-model="nota_dez.quantidade" ng-change="changeNota()">
+	 	 		<p class="text-danger" ng-show="caixaForm.dez.$error.number"> {{numero_invalido}}</p>
+	  		</div>
+	  	</div>
+  	</div>
+
+  	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+	      		<button type="submit" class="btn btn-default" ng-disabled="caixaForm.$invalid">Salvar</button>
+			</div>
+		</div>
+  	</div>
+
+</form>
+
+<hr>
+
+<table class="table">
+	<thead> 
+		<tr> 
+			<th>#</th> 
+			<th>Nome</th> 
+			<th>Saldo (R$)</th> 
+		</tr> 
+	</thead> 
+	<tbody> 
+		<tr ng-repeat = "caixa in caixas"> 
+			<th scope="row">{{caixa.id}}</th> 
+			<td>{{caixa.nome}}</td> 
+			<td>{{caixa.saldo | currency:"R$ "}}</td> 
+		</tr>
+	</tbody> 
+</table>

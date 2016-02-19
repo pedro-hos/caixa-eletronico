@@ -1,0 +1,49 @@
+
+<div class="alert alert-danger" role="alert" ng-repeat="mensagem in mensagens">
+	{{mensagem.message}}
+</div>
+
+
+<form class="form-inline" name="usuarioForm" ng-submit="novo()">
+
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="_nome" placeholder="Nome" ng-model="usuario.nome" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">R$</div>
+      <input type="number" class="form-control" name="saldo" id="_saldo" placeholder="Saldo" ng-model="usuario.saldo" min="10" required>
+      <div class="input-group-addon">.00</div>
+    </div>
+    <p class="text-danger" ng-show="usuarioForm.saldo.$error.number"> {{numero_invalido}}</p>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-disabled="usuarioForm.$invalid">Salvar</button>
+    </div>
+  </div>
+
+</form>
+
+<hr>
+
+<table class="table">
+	<thead> 
+		<tr> 
+			<th>#</th> 
+			<th>Nome</th> 
+			<th>Saldo (R$)</th> 
+		</tr> 
+	</thead> 
+	<tbody> 
+		<tr ng-repeat = "usuario in usuarios"> 
+			<th scope="row">{{usuario.id}}</th> 
+			<td>{{usuario.nome}}</td> 
+			<td>{{usuario.saldo | currency:"R$ "}}</td> 
+		</tr>
+	</tbody> 
+</table>

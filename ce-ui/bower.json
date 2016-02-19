@@ -1,0 +1,27 @@
+{
+  "name": "ce-ui",
+  "homepage": "https://github.com/pedro-hos/caixa-eletronico",
+  "authors": [
+    "pedro-hos <pedro-hos@outlook.com>"
+  ],
+  "description": "Projeto frontend para cadastro de usuarios e caixas eletronicos",
+  "main": "",
+  "moduleType": [],
+  "license": "APACHE LICENSE 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.9",
+    "angular-mocks": "^1.4.9",
+    "angular-resource": "^1.4.9",
+    "angular-route": "^1.4.9",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.0"
+  }
+}
