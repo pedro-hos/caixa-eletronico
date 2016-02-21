@@ -27,6 +27,12 @@ O que será necessário?
 Como Rodar?
 ===
 
+Docker
+===
+
+Normal
+===
+
 Após clonar o projeto:
 
 * _ce-crud_: Dentro da pasta do projeto executar o comando: `mvn spring-boot:run -Dspring.profiles.active='elephant'` para usar o banco do ElephantSQL ou `mvn spring-boot:run -Dspring.profiles.active='local'` para rodar com a base local;
